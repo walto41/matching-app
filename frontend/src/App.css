@@ -1,0 +1,531 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(135deg, #fce4ec 0%, #f0f2f5 60%);
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+/* ── Layout ── */
+.app-container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
+}
+
+/* ── Logo / heading ── */
+h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #e91e8c;
+  letter-spacing: -0.5px;
+}
+
+.tagline {
+  text-align: center;
+  color: #aaa;
+  margin: 6px 0 28px;
+  font-size: 0.95rem;
+}
+
+/* ── App header (logged-in) ── */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.app-header h1 {
+  margin-bottom: 0;
+  font-size: 1.6rem;
+}
+
+.user-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.logout-btn {
+  padding: 6px 14px;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: #999;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  border-color: #e91e8c;
+  color: #e91e8c;
+}
+
+/* ── Tabs ── */
+.tabs {
+  display: flex;
+  background: #fff;
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  gap: 2px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 9px 4px;
+  background: none;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: #999;
+  transition: all 0.2s;
+}
+
+.tabs button.active {
+  background: #e91e8c;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ── Cards ── */
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* ── Avatar ── */
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e91e8c, #ff6ec7);
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.avatar-lg {
+  width: 88px;
+  height: 88px;
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+}
+
+/* ── Forms ── */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input {
+  padding: 12px 16px;
+  border: 1.5px solid #eee;
+  border-radius: 12px;
+  font-size: 1rem;
+  outline: none;
+  background: #fafafa;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+input:focus {
+  border-color: #e91e8c;
+  background: #fff;
+}
+
+button[type="submit"], button.primary {
+  padding: 12px;
+  background: linear-gradient(135deg, #e91e8c, #c2177a);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+button[type="submit"]:hover, button.primary:hover {
+  opacity: 0.9;
+}
+
+/* ── Profile ── */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 8px;
+}
+
+.profile-info h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.profile-info p {
+  color: #888;
+  font-size: 0.95rem;
+}
+
+/* ── Match list ── */
+.match-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.match-card {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px;
+  background: #fdf4f9;
+  border-radius: 14px;
+  border-left: 4px solid #e91e8c;
+}
+
+.match-card strong {
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+
+.match-card span {
+  font-size: 0.88rem;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+/* ── Swipe card ── */
+.swipe-card {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.1s ease;
+}
+
+.swipe-card:active {
+  cursor: grabbing;
+}
+
+/* Full-size photo */
+.swipe-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Gradient + text when no photo */
+.swipe-card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6rem;
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+}
+
+/* Gradient overlay at the bottom */
+.swipe-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 48px 24px 24px;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+  color: white;
+}
+
+.swipe-card-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.swipe-card-bio {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  line-height: 1.4;
+}
+
+/* Swipe hint labels */
+.swipe-label {
+  position: absolute;
+  top: 28px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 3px solid;
+  opacity: 0;
+  transition: opacity 0.15s;
+  pointer-events: none;
+}
+
+.swipe-label.like {
+  left: 24px;
+  color: #4caf50;
+  border-color: #4caf50;
+  transform: rotate(-15deg);
+}
+
+.swipe-label.pass {
+  right: 24px;
+  color: #e91e8c;
+  border-color: #e91e8c;
+  transform: rotate(15deg);
+}
+
+/* Action buttons below the card */
+.swipe-actions {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.pass-btn {
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+  border: 2px solid #eee;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #e91e8c;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.pass-btn:hover {
+  border-color: #e91e8c;
+  transform: scale(1.1);
+}
+
+.like-btn-lg {
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #e91e8c, #c2177a);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(233, 30, 140, 0.35);
+}
+
+.like-btn-lg:hover {
+  transform: scale(1.1);
+}
+
+/* ── Match banner ── */
+.match-banner {
+  background: linear-gradient(135deg, #e91e8c, #ff6ec7);
+  color: white;
+  text-align: center;
+  padding: 16px;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Like button (match cards) ── */
+.like-btn {
+  margin-top: 4px;
+  padding: 7px 18px;
+  background: #e91e8c;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  align-self: flex-start;
+  transition: opacity 0.2s;
+}
+
+.like-btn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.like-btn:disabled {
+  background: #ddd;
+  cursor: default;
+}
+
+/* ── Chat ── */
+.chat-container {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  overflow: hidden;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #fafafa;
+}
+
+.chat-bubble {
+  max-width: 72%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  line-height: 1.4;
+}
+
+.chat-bubble small {
+  font-size: 0.68rem;
+  opacity: 0.55;
+}
+
+.chat-bubble.mine {
+  background: linear-gradient(135deg, #e91e8c, #c2177a);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-bubble.theirs {
+  background: #fff;
+  color: #333;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+
+.chat-input {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid #f0f0f0;
+  background: #fff;
+}
+
+.chat-input input {
+  flex: 1;
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+}
+
+.chat-input button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #e91e8c, #c2177a);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.chat-input button:hover {
+  opacity: 0.9;
+}
+
+/* ── Profile photo ── */
+.avatar-img {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 16px;
+  border: 3px solid #e91e8c;
+}
+
+.upload-btn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 20px;
+  background: none;
+  border: 1.5px solid #e91e8c;
+  border-radius: 20px;
+  color: #e91e8c;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.upload-btn:hover {
+  background: #e91e8c;
+  color: white;
+}
+
+/* ── Utility ── */
+.error {
+  color: #e53935;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.muted {
+  color: #bbb;
+  font-size: 0.9rem;
+}
