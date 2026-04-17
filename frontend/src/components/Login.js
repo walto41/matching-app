@@ -1,7 +1,7 @@
 import { useState } from "react";
 import API_BASE from "../config";
 
-function Register() {
+function Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -9,13 +9,17 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE}/register`, {
+      const response = await fetch(`${API_BASE}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
       const data = await response.json();
-      setMessage(data.message);
+      if (response.ok) {
+        onLogin({ id: data.user_id, username });
+      } else {
+        setMessage(data.message);
+      }
     } catch (error) {
       setMessage("Error connecting to backend");
     }
@@ -23,7 +27,7 @@ function Register() {
 
   return (
     <div className="card">
-      <h2>Create Account</h2>
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <input
           placeholder="Username"
@@ -36,11 +40,11 @@ function Register() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
       </form>
       {message && <p className="muted" style={{ marginTop: "12px" }}>{message}</p>}
     </div>
   );
 }
 
-export default Register;
+export default Login;
